@@ -1,13 +1,20 @@
 package net.tou.mantri.onlineshopping.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import net.tou.mantri.shoppingbackend.dao.CategoryDAO;
+import net.tou.mantri.shoppingbackend.dto.Category;
+
 @Controller
 public class PageController {
+	
+	@Autowired
+	private CategoryDAO categoryDAO;
 
 	@RequestMapping(value = { "/", "/home", "/index" })
 	public ModelAndView index() {
@@ -15,6 +22,7 @@ public class PageController {
 		ModelAndView mv = new ModelAndView("page");
 		//mv.addObject("greeting", "Welcome to SPr");
 		mv.addObject("title", "Home");
+		mv.addObject("categories",categoryDAO.list());
 		mv.addObject("userClickHome", true);
 		return mv;
 	}
@@ -39,5 +47,33 @@ public class PageController {
 		mv.addObject("userClickContact", true);
 		return mv;
 	}
+//Methods to load all the products
+	
 
+	@RequestMapping(value = "/show/all/products")
+	public ModelAndView showAllProduct() {
+
+		ModelAndView mv = new ModelAndView("page");
+		//mv.addObject("greeting", "Welcome to SPr");
+		mv.addObject("title", "All Products");
+		mv.addObject("categories",categoryDAO.list());
+		mv.addObject("userClickAllProducts", true);
+		return mv;
+	}
+	
+	@RequestMapping(value = "/show/category/{id}/products")
+	public ModelAndView showCategoryProduct(@PathVariable("id")int id) {
+
+		ModelAndView mv = new ModelAndView("page");
+		
+		//category Dao to fetch a single category
+		Category category=null;
+		category=categoryDAO.get(id);
+		mv.addObject("title", category.getName());
+		mv.addObject("categories",categoryDAO.list());
+		//passing the single category object
+		mv.addObject("category",category);
+		mv.addObject("userClickCategoryProducts", true);
+		return mv;
+	}
 }
