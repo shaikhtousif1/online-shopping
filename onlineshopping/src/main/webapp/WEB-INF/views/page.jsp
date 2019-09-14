@@ -24,11 +24,14 @@
 <title>Online Shopping - ${title}</title>
 <script type="text/javascript">
 	window.menu = '${title}';
+
+	window.contextRoot = '${contextRoot}';
 </script>
 
 <!-- Bootstrap core CSS -->
 <link href="${css}/bootstrap.min.css" rel="stylesheet">
 <link href="${css}/bootstrap-readable-theme.css" rel="stylesheet">
+<link href="${css}/dataTables.bootstrap.css" rel="stylesheet">
 <!-- Custom styles for this template -->
 <link href="${css}/myapp.css" rel="stylesheet">
 
@@ -61,11 +64,19 @@
 			<c:if test="${userClickContact == true}">
 				<%@include file="contact.jsp"%>
 			</c:if>
-			
-				<!-- load only when user click contact -->
-			<c:if test="${userClickAllProducts == true or userClickCategoryProducts == true}">
+
+			<!-- load only when user click contact -->
+			<c:if
+				test="${userClickAllProducts == true or userClickCategoryProducts == true}">
 				<%@include file="listProducts.jsp"%>
 			</c:if>
+
+			<!-- load only when user click show product -->
+			<c:if test="${userClickShowProduct == true}">
+				<%@include file="singleProduct.jsp"%>
+			</c:if>
+
+
 		</div>
 
 
@@ -76,6 +87,13 @@
 		<!-- Bootstrap core JavaScript -->
 		<script src="${js}/jquery.js"></script>
 		<script src="${js}/bootstrap.min.js"></script>
+
+		<!-- datatable plugin -->
+		<script src="${js}/jquery.dataTables.js"></script>
+
+
+
+
 
 		<!-- self coded java script -->
 		<script src="${js}/myapp.js"></script>

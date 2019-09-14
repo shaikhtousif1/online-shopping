@@ -8,13 +8,18 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import net.tou.mantri.shoppingbackend.dao.CategoryDAO;
+import net.tou.mantri.shoppingbackend.dao.ProductDAO;
 import net.tou.mantri.shoppingbackend.dto.Category;
+import net.tou.mantri.shoppingbackend.dto.Product;
 
 @Controller
 public class PageController {
 	
 	@Autowired
 	private CategoryDAO categoryDAO;
+	
+	@Autowired
+	private ProductDAO productDAO;
 
 	@RequestMapping(value = { "/", "/home", "/index" })
 	public ModelAndView index() {
@@ -74,6 +79,27 @@ public class PageController {
 		//passing the single category object
 		mv.addObject("category",category);
 		mv.addObject("userClickCategoryProducts", true);
+		return mv;
+	}
+	
+	/*
+	to view product in single view
+	*/
+	
+	@RequestMapping(value = "/show/{id}/product")
+	public ModelAndView showSingleProductPage(@PathVariable("id")int id) {
+
+		ModelAndView mv = new ModelAndView("page");
+		Product product =productDAO.get(id);
+		
+		//update the view count
+		product.setViews(product.getViews()+1);
+		productDAO.update(product);
+		
+		mv.addObject("title",product.getName());
+		mv.addObject("product",product);
+		mv.addObject("userClickShowProduct",true);
+		
 		return mv;
 	}
 }
