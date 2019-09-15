@@ -84,8 +84,8 @@ $(function() {
 				mRender : function(data, type, row) {
 					
 					var str='';
-					str+= '<a href="/'+window.contextRoot+'/show/'+data+'/product">View</a> &#160';
-					str+= '<a href="/'+window.contextRoot+'/cart/add/'+data+'/product">Add to Cart</a>';
+					str+= '<a href="'+window.contextRoot+'/show/'+data+'/product">View</a> &#160';
+					str+= '<a href="'+window.contextRoot+'/cart/add/'+data+'/product">Add to Cart</a>';
 					return str;
 				}
 			} ]
