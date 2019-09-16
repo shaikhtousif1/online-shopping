@@ -1,5 +1,7 @@
 package net.tou.mantri.onlineshopping.controller;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -7,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import net.tou.mantri.onlineshopping.exception.ProductNotFoundException;
 import net.tou.mantri.shoppingbackend.dao.CategoryDAO;
 import net.tou.mantri.shoppingbackend.dao.ProductDAO;
 import net.tou.mantri.shoppingbackend.dto.Category;
@@ -14,6 +17,8 @@ import net.tou.mantri.shoppingbackend.dto.Product;
 
 @Controller
 public class PageController {
+	
+	private static final Logger logger= LoggerFactory.getLogger(PageController.class);
 	
 	@Autowired
 	private CategoryDAO categoryDAO;
@@ -27,6 +32,10 @@ public class PageController {
 		ModelAndView mv = new ModelAndView("page");
 		//mv.addObject("greeting", "Welcome to SPr");
 		mv.addObject("title", "Home");
+		
+		logger.info("Inside PageController index method -Info");
+		logger.debug("Inside PageController index method - DEBUG");
+		
 		mv.addObject("categories",categoryDAO.list());
 		mv.addObject("userClickHome", true);
 		return mv;
@@ -87,10 +96,12 @@ public class PageController {
 	*/
 	
 	@RequestMapping(value = "/show/{id}/product")
-	public ModelAndView showSingleProductPage(@PathVariable("id")int id) {
+	public ModelAndView showSingleProductPage(@PathVariable("id")int id) throws ProductNotFoundException {
 
 		ModelAndView mv = new ModelAndView("page");
 		Product product =productDAO.get(id);
+		
+		if(product==null) throw new ProductNotFoundException();
 		
 		//update the view count
 		product.setViews(product.getViews()+1);
