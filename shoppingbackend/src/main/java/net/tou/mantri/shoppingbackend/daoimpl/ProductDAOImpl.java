@@ -1,6 +1,6 @@
 package net.tou.mantri.shoppingbackend.daoimpl;
 
-import java.util.ArrayList;
+//import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.SessionFactory;
@@ -18,7 +18,7 @@ public class ProductDAOImpl implements ProductDAO {
 
 	@Autowired
 	private SessionFactory sessionFactory;
-	private static List<Product> categories = new ArrayList<>();
+	//private static List<Product> categories = new ArrayList<>();
 
 	@Override
 	public Product get(int productid) {

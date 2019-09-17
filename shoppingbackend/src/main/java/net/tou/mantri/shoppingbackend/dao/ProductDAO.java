@@ -2,7 +2,6 @@ package net.tou.mantri.shoppingbackend.dao;
 
 import java.util.List;
 
-import net.tou.mantri.shoppingbackend.dto.Category;
 import net.tou.mantri.shoppingbackend.dto.Product;
 
 public interface ProductDAO {
