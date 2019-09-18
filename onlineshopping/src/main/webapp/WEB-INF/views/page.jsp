@@ -95,7 +95,7 @@
 		<script src="${js}/jquery.dataTables.js"></script>
 
 
-
+		<script src="${js}/bootbox.min.js"></script>
 
 
 		<!-- self coded java script -->
