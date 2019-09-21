@@ -87,8 +87,12 @@
 		<!-- Footer comes here -->
 		<%@include file="./shared/footer.jsp"%>
 
-		<!-- Bootstrap core JavaScript -->
+		
 		<script src="${js}/jquery.js"></script>
+		
+		<!-- jquery validator JavaScript -->
+		<script src="${js}/jquery.validate.js"></script>
+		<!-- Bootstrap core JavaScript -->
 		<script src="${js}/bootstrap.min.js"></script>
 
 		<!-- datatable plugin -->

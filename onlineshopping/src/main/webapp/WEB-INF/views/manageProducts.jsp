@@ -89,8 +89,20 @@
 
 							<sf:select class="form-control" id="categoryId" path="categoryId"
 								items="${categories}" itemLabel="name" itemValue="id" />
+
+							<c:if test="${product.id==0}">
+								<div class="text-right">
+									<br />
+									<button type="button" data-toggle="modal"
+										data-target="#myCategoryModal" class="btn btn-warning btn xs">Add
+										Category</button>
+								</div>
+							</c:if>
+
 						</div>
 					</div>
+
+
 
 					<div class="form-group">
 						<div class="col-md-4 col-md-12">
@@ -132,37 +144,19 @@
 							<th>Id</th>
 							<th>&#160;</th>
 							<th>Name</th>
+							<th>Brand</th>
 							<th>Qty. Avail</th>
 							<th>Unit Price</th>
 							<th>Active</th>
 							<th>Edit</th>
 						</tr>
 					</thead>
-					<tbody>
-						<tr>
-							<td>4</td>
-							<td><img class="dataTableImgMP"
-								src="${contextRoot}/resources/images/1234.jpg" /></td>
-							<td>Xiaomi</td>
-							<td>5</td>
-							<td>&#8377; 10000.00</td>
-							<td><label class="switch"> <input type="checkbox"
-									checked="checked" value="4">
-									<div class="slider"></div>
-
-							</label></td>
-							<td>
-							<a href="${contextRoot}/manage/4/product" class="btn btn-warning">Edit</a>
-							
-							</td>
-
-						</tr>
-					</tbody>
 					<tfoot>
 						<tr>
 							<th>Id</th>
 							<th>&#160;</th>
 							<th>Name</th>
+							<th>Brand</th>
 							<th>Qty. Avail</th>
 							<th>Unit Price</th>
 							<th>Active</th>
@@ -170,15 +164,60 @@
 						</tr>
 					</tfoot>
 
-
 				</table>
 
 			</div>
 
 		</div>
 
+		<div class="modal fade" id="myCategoryModal" role="dialog"
+			tabindex="-1">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<!-- Modal header -->
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal">
+							<span>&times;</span>
+						</button>
+						<h4 class="modal-title text-left">Add new Category</h4>
+					</div>
+					<div class="modal-body">
+						<!-- Category form(spring) -->
+						<sf:form id="categoryForm" modelAttribute="category"
+							action="${contextRoot}/manage/category" method="POST"
+							class="form-horizontal">
+							<div class="form-group">
+								<label for="category_name" class="control-label col-md-4">Category
+									Name</label>
+								<div class="col-md-8">
+									<sf:input type="text" path="name" id="category_name"
+										class="form-control" />
+								</div>
+							</div>
+							<div class="form-group">
+								<label for="category_description" class="control-label col-md-4">Category
+									Description</label>
+								<div class="col-md-8">
+									<sf:textarea cols="" rows="5" path="description" id="category_description"
+										class="form-control" />
+								</div>
+							</div>
+							<div class="form-group">
+								<div class="col-md-offset-4 col-md-8">
+								<input type="submit" value="Add category" class="btn btn-primary"/>
+								</div>
+							</div>
+						</sf:form>
+					</div>
+				</div>
+
+			</div>
+
+		</div>
 
 	</div>
+
+
 
 
 </div>
