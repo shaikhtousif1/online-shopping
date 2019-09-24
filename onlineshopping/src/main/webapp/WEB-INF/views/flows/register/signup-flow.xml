@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<flow xmlns="http://www.springframework.org/schema/webflow"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.springframework.org/schema/webflow
+                          http://www.springframework.org/schema/webflow/spring-webflow.xsd">
+                          
+            <!-- start state -->
+            <view-state id="personal" view="flows/register/signup-personal"></view-state>
+            
+            <!-- end state -->
+            <end-state id="home" view="externalRedirect:contextRelative:/"></end-state>
+            
+            <!-- Global Transition -->
+            <global-transitions>
+            <transition on="home" to="home"></transition>
+            
+            </global-transitions>
+
+</flow>
