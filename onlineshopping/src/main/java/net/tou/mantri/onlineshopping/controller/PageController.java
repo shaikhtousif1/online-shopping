@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import net.tou.mantri.onlineshopping.exception.ProductNotFoundException;
@@ -60,7 +61,31 @@ public class PageController {
 		mv.addObject("userClickContact", true);
 		return mv;
 	}
-//Methods to load all the products
+	
+	
+	@RequestMapping(value = "/login")
+	public ModelAndView login(@RequestParam(name="error",required=false)String error) {
+
+		ModelAndView mv = new ModelAndView("login");
+		//mv.addObject("greeting", "Welcome to SPr");
+		if (error!=null) {
+			mv.addObject("message","Invalid user name or password!");
+		}
+		mv.addObject("title", "Login");
+		return mv;
+	}
+	
+	@RequestMapping(value = { "/access-denied" })
+	public ModelAndView accessDenied() {
+
+		ModelAndView mv = new ModelAndView("error");
+		//mv.addObject("greeting", "Welcome to SPr");
+		mv.addObject("title", "403-Access Denied");
+		mv.addObject("errorTitle", "Aha! Caught You.");
+		mv.addObject("errorDecsription", "You are not authorised to access this page");
+		return mv;
+	}
+//Methods to load all the productsregiste
 	
 
 	@RequestMapping(value = "/show/all/products")

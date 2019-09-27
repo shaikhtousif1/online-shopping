@@ -26,7 +26,7 @@ CREATE TABLE user_detail (
 	CONSTRAINT pk_user_id PRIMARY KEY(id)
 );
 
-INSERT into user_detail (first_name,last_name,role,enabled,email,password,contact_number) values ('Tousif','shaikh','Admin',true,'tous@g.com','tous','909999');
+INSERT into user_detail (first_name,last_name,role,enabled,email,password,contact_number) values ('Tousif','shaikh','Admin',true,'tous@g.com','$2b$10$I.CWgBlzix5UdBSySyh09OG98CyaaX7URr.zdvDvfRTu9RXcRypzK','909999');
 
 CREATE TABLE product (
 	id IDENTITY,

@@ -97,20 +97,20 @@ public class Address implements Serializable {
 	}
 		
 	
+	
+	@Column(name = "user_id")
+	private int userId;
 	public boolean isShipping() {
 		return shipping;
 	}
 	public void setShipping(boolean shipping) {
 		this.shipping = shipping;
 	}
-	
-	@ManyToOne
-	private User user;
-	public User getUser() {
-		return user;
+	public int getUserId() {
+		return userId;
 	}
-	public void setUser(User user) {
-		this.user = user;
+	public void setUserId(int userId) {
+		this.userId = userId;
 	}
 	
 }

@@ -26,7 +26,7 @@ public class HibernateConfig {
 	private final static String DATABASE_PASSWORD = "";
 
 	// datasource bean will be available
-	@Bean
+	@Bean("dataSource")
 	public DataSource getDataSource() {
 
 		BasicDataSource datasource = new BasicDataSource();
