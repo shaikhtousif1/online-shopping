@@ -124,10 +124,5 @@ public class UserDAOImpl implements UserDAO {
 		}
 	}
 
-	@Override
-	public boolean updateCart(Cart cart) {
-		// TODO Auto-generated method stub
-		return false;
-	}
 
 }

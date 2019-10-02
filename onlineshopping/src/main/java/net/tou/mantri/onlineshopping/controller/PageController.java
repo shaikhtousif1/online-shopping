@@ -1,8 +1,14 @@
 package net.tou.mantri.onlineshopping.controller;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -64,12 +70,18 @@ public class PageController {
 	
 	
 	@RequestMapping(value = "/login")
-	public ModelAndView login(@RequestParam(name="error",required=false)String error) {
+	public ModelAndView login(@RequestParam(name="error",required=false)String error,
+			
+			@RequestParam(name="logout",required=false)String logout) {
 
 		ModelAndView mv = new ModelAndView("login");
 		//mv.addObject("greeting", "Welcome to SPr");
 		if (error!=null) {
 			mv.addObject("message","Invalid user name or password!");
+		}
+		
+		if (logout!=null) {
+			mv.addObject("logout","User has successfully logout!");
 		}
 		mv.addObject("title", "Login");
 		return mv;
@@ -136,5 +148,19 @@ public class PageController {
 		mv.addObject("userClickShowProduct",true);
 		
 		return mv;
+	}
+	
+	//for logout
+	
+	@RequestMapping(value="/perform-logout")
+	public String logout(HttpServletRequest request,HttpServletResponse response) {
+		
+		//first we are going to fetch the authentication
+		Authentication auth =SecurityContextHolder.getContext().getAuthentication();
+		if(auth!=null) {
+			new SecurityContextLogoutHandler().logout(request,response,auth);
+		}
+		return "redirect:/login?logout";
+		
 	}
 }

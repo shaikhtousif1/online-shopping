@@ -49,3 +49,16 @@ CREATE TABLE product (
 
 INSERT into product (code,name,brand,description,unit_price,quantity,is_active,category_id,supplier_id,purchases,views) values ('123','Iphone','Apple','This is Apple iphone',10.2,10,true,(SELECT id FROM USER_DETAIL),(SELECT id FROM CATEGORY where id=1),0,0);
 INSERT into product (code,name,brand,description,unit_price,quantity,is_active,category_id,supplier_id,purchases,views) values ('12345','S10','Samsung','This is Samsung phone',75000,0,true,(SELECT id FROM USER_DETAIL),(SELECT id FROM CATEGORY where id=1),0,0);
+
+
+CREATE TABLE cart_line (
+	id IDENTITY,
+	cart_id int,
+	total DECIMAL(10,2),
+	product_id int,
+	product_count int,
+	buying_price DECIMAL(10,2),
+	is_available boolean,
+	CONSTRAINT fk_cartline_product_id FOREIGN KEY (product_id ) REFERENCES product (id),
+	CONSTRAINT pk_cartline_id PRIMARY KEY (id)
+);

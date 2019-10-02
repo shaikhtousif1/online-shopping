@@ -134,40 +134,41 @@
 			</hr>
 		</div>
 		<div class="col-md-offset-2 col-md-12">
-			<div style="overflow: auto">
+			<div class="container-fluid">
+				<div class="table-responsive">
 
-				<table id="adminProductsTable"
-					class="table table-stripped table-bordered">
+					<table id="adminProductsTable"
+						class="table table-stripped table-bordered">
 
-					<thead>
-						<tr>
-							<th>Id</th>
-							<th>&#160;</th>
-							<th>Name</th>
-							<th>Brand</th>
-							<th>Qty. Avail</th>
-							<th>Unit Price</th>
-							<th>Active</th>
-							<th>Edit</th>
-						</tr>
-					</thead>
-					<tfoot>
-						<tr>
-							<th>Id</th>
-							<th>&#160;</th>
-							<th>Name</th>
-							<th>Brand</th>
-							<th>Qty. Avail</th>
-							<th>Unit Price</th>
-							<th>Active</th>
-							<th>Edit</th>
-						</tr>
-					</tfoot>
+						<thead>
+							<tr>
+								<th>Id</th>
+								<th>&#160;</th>
+								<th>Name</th>
+								<th>Brand</th>
+								<th>Qty. Avail</th>
+								<th>Unit Price</th>
+								<th>Active</th>
+								<th>Edit</th>
+							</tr>
+						</thead>
+						<tfoot>
+							<tr>
+								<th>Id</th>
+								<th>&#160;</th>
+								<th>Name</th>
+								<th>Brand</th>
+								<th>Qty. Avail</th>
+								<th>Unit Price</th>
+								<th>Active</th>
+								<th>Edit</th>
+							</tr>
+						</tfoot>
 
-				</table>
+					</table>
 
+				</div>
 			</div>
-
 		</div>
 
 		<div class="modal fade" id="myCategoryModal" role="dialog"
@@ -198,13 +199,14 @@
 								<label for="category_description" class="control-label col-md-4">Category
 									Description</label>
 								<div class="col-md-8">
-									<sf:textarea cols="" rows="5" path="description" id="category_description"
-										class="form-control" />
+									<sf:textarea cols="" rows="5" path="description"
+										id="category_description" class="form-control" />
 								</div>
 							</div>
 							<div class="form-group">
 								<div class="col-md-offset-4 col-md-8">
-								<input type="submit" value="Add category" class="btn btn-primary"/>
+									<input type="submit" value="Add category"
+										class="btn btn-primary" />
 								</div>
 							</div>
 						</sf:form>

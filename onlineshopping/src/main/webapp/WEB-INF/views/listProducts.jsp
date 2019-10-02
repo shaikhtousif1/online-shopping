@@ -37,30 +37,40 @@
 			<div class="row">
 				<div class="col-md-offset-2 col-md-12">
 
-					<table id="productListTable"
-						class="table table-stripped tabled-bordered">
-						<thead>
-							<tr>
-								<th></th>
-								<th>Name</th>
-								<th>Brand</th>
-								<th>Price</th>
-								<th>Qty available</th>
-								<th></th>
-							</tr>
-						</thead>
-						<tfoot>
-							<tr>
-								<th></th>
-								<th>Name</th>
-								<th>Brand</th>
-								<th>Price</th>
-								<th>Qty available</th>
-								<th></th>
-							</tr>
-						</tfoot>
+					<div class="container-fluid">
 
-					</table>
+						<div class="table-responsive">
+
+							<table id="productListTable"
+								class="table table-stripped tabled-bordered">
+								<thead>
+									<tr>
+										<th></th>
+										<th>Name</th>
+										<th>Brand</th>
+										<th>Price</th>
+										<th>Qty available</th>
+										<th></th>
+									</tr>
+								</thead>
+								<tfoot>
+									<tr>
+										<th></th>
+										<th>Name</th>
+										<th>Brand</th>
+										<th>Price</th>
+										<th>Qty available</th>
+										<th></th>
+									</tr>
+								</tfoot>
+
+							</table>
+
+						</div>
+
+					</div>
+
+
 				</div>
 
 			</div>

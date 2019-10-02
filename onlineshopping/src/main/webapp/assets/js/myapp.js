@@ -19,6 +19,10 @@ $(function() {
 	case 'Manage Products':
 		$('#manageProducts').addClass('active');
 		break;
+		
+	case 'User Cart':
+		$('#userCart').addClass('active');
+		break;
 
 	default:
 		if (menu == "Home")
@@ -28,20 +32,19 @@ $(function() {
 		break;
 	}
 
-	//to tackle csrf
-	var token=$('meta[name="_csrf"]').attr('content');
-	var header=$('meta[name="_csrf_header"]').attr('content');
-	if (token.length > 0 
-			&& header.length > 0){
-		
-		//set the token header for Ajax request
-		$(document).ajaxSend(function(e, xhr, options){
-			
-			xhr.setRequestHeader(header,token);
-			
+	// to tackle csrf
+	var token = $('meta[name="_csrf"]').attr('content');
+	var header = $('meta[name="_csrf_header"]').attr('content');
+	if (token.length > 0 && header.length > 0) {
+
+		// set the token header for Ajax request
+		$(document).ajaxSend(function(e, xhr, options) {
+
+			xhr.setRequestHeader(header, token);
+
 		});
 	}
-	
+
 	// code for jquery
 
 	var $table = $('#productListTable');
@@ -121,15 +124,25 @@ $(function() {
 											+ '/show/'
 											+ data
 											+ '/product" class="btn btn-primary">View</a>';
-									if (row.quantity < 1) {
-
-										str += '<a href="javascript:void(0)" class="btn btn-success disabled"><span class="glyphicon glyphicon-shopping-cart"></span>Cart</a>';
-									} else {
+									if (userRole == 'ADMIN') {
 										str += '<a href="'
 												+ window.contextRoot
-												+ '/cart/add/'
+												+ '/manage/'
 												+ data
-												+ '/product" class="btn btn-success"><span class="glyphicon glyphicon-shopping-cart"></span>Cart</a>';
+												+ '/product" class="btn btn-warning"><span class="glyphicon glyphicon-pencil"></span>Edit</a>';
+									} else {
+										if (row.quantity < 1) {
+
+											str += '<a href="javascript:void(0)" class="btn btn-success disabled"><span class="glyphicon glyphicon-shopping-cart"></span>Cart</a>';
+										} else {
+
+											str += '<a href="'
+													+ window.contextRoot
+													+ '/cart/add/'
+													+ data
+													+ '/product" class="btn btn-success"><span class="glyphicon glyphicon-shopping-cart"></span>Cart</a>';
+
+										}
 									}
 									return str;
 								}
@@ -335,30 +348,29 @@ $(function() {
 							required : 'Please add the description for this category'
 						}
 					},
-					errorElement:'em',
-					errorPlacement:function(error,element){
-						//add the class of help-block
+					errorElement : 'em',
+					errorPlacement : function(error, element) {
+						// add the class of help-block
 						error.addClass('help-block');
-						//add the error element after the input element
+						// add the error element after the input element
 						error.insertAfter(element);
-						
+
 					}
 
 				});
 	}
-//---------------------------------------------------------------
+	// ---------------------------------------------------------------
 	// -----validation code for login-------
-	
+
 	var loginForm = $('#loginForm');
-	
+
 	if (loginForm.length) {
-		
-		loginForm
-		.validate({
-			
+
+		loginForm.validate({
+
 			rules : {
 				username : {
-					
+
 					required : true,
 					email : true
 				},
@@ -367,9 +379,9 @@ $(function() {
 				}
 			},
 			messages : {
-				
+
 				username : {
-					
+
 					required : 'Please enter user name!',
 					email : 'Please enter valid email address'
 				},
@@ -377,16 +389,52 @@ $(function() {
 					required : 'Please enter password!'
 				}
 			},
-			errorElement:'em',
-			errorPlacement:function(error,element){
-				//add the class of help-block
+			errorElement : 'em',
+			errorPlacement : function(error, element) {
+				// add the class of help-block
 				error.addClass('help-block');
-				//add the error element after the input element
+				// add the error element after the input element
 				error.insertAfter(element);
-				
+
 			}
-			
+
 		});
 	}
-//---------------------------------------------------------------
+	// ---------------------------------------------------------------
+	//handling the click event of refresh cart button
+	$('button[name="refreshCart"]').click(function(){
+		
+		//fetch the cart line id
+		var cartLineId=$(this).attr('value');
+		var countElement=$('#count_'+cartLineId);
+		
+		var originalCount=countElement.attr('value');
+		var currentCount=countElement.val();
+		
+		//work only whwn the count is changed
+		if(currentCount!=originalCount){
+			
+			if(currentCount<1||currentCount>3){
+				//reverting back to original count
+				countElement.val(originalCount);
+				bootbox.alert({
+					
+					size:'medium',
+					title:'Error',
+					message:'Product count should be minimum1 and maximu 3!'
+				});
+			}
+			else{
+				
+				var updateUrl=window.contextRoot+'/cart/'+cartLineId+'/update?count='+currentCount;
+				//forward it to controller
+				window.location.href = updateUrl;	
+			}
+		}
+		
+		
+	});
+	
+	
+	//---------------------------------------------------------------
 });
